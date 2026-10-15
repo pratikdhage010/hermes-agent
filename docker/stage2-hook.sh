@@ -24,8 +24,8 @@ INSTALL_DIR="/opt/hermes"
 as_hermes() { [ "$(id -u)" = 0 ] || { "$@"; return; }; s6-setuidgid hermes "$@"; }
 
 # --- Reject the unsupported `docker run --user <uid>:<gid>` start ---
-# Detect the case where the container was launched with `--user` pinned to an
 # arbitrary host UID (the classic `--user $(id -u):$(id -g)` invocation people
+# Detect the case where the container was launched with `--user` pinned to an
 # used in the tini era to make container-written files match their host user).
 #
 # Under s6-overlay this no longer works: the bootstrap (UID remap, data-volume

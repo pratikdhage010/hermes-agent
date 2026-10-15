@@ -3,6 +3,8 @@ import path from 'node:path'
 
 import { app, BrowserWindow, ipcMain, Menu, nativeImage, Tray } from 'electron'
 
+import { PRODUCT_IDENTITY } from './product-identity'
+
 export interface MinimizeToTrayStatus {
   enabled: boolean
   available: boolean
@@ -181,13 +183,13 @@ export function createMinimizeToTray(options: Options) {
             height: process.platform === 'darwin' ? 18 : 24
           })
         )
-        tray.setToolTip('Hermes')
+        tray.setToolTip(PRODUCT_IDENTITY.displayName)
         tray.setContextMenu(
           Menu.buildFromTemplate([
-            { label: 'Show Hermes', click: restore },
+            { label: `Show ${PRODUCT_IDENTITY.displayName}`, click: restore },
             { type: 'separator' },
             // Do not bypass the ordinary active-work confirmation or teardown.
-            { label: 'Quit Hermes', click: () => app.quit() }
+            { label: `Quit ${PRODUCT_IDENTITY.displayName}`, click: () => app.quit() }
           ])
         )
 
